@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\PollutionWaste.WebApi.props" />
+</Project>
