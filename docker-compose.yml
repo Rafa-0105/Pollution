@@ -1,0 +1,31 @@
+﻿version: '3.8'
+
+services:
+  api:
+    image: dotnet-city-api:latest 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80" 
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ORACLE_HOST=oracle.fiap.com.br
+      - ORACLE_PORT=1521
+      - ORACLE_USER=RM550948
+      - ORACLE_PASSWORD=290501
+      - ORACLE_DB=FIAP
+    depends_on:
+      - oracle-db 
+
+  oracle-db:
+    image: oracleinanutshell/oracle-xe-11g 
+    environment:
+      - ORACLE_ALLOW_REMOTE=true
+      - ORACLE_DISABLE_ASYNCH_IO=true
+      - ORACLE_PASSWORD=password
+    ports:
+      - "1521:1521" 
+
+volumes:
+  oracle_data: 
